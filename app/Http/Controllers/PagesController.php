@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use App\Product;
+
 
 class PagesController extends Controller
 {
@@ -14,8 +15,7 @@ class PagesController extends Controller
      */
     public function index()
     {
-        $product = DB::table('product')->get();
-
+        $product = Product::all();
         return view('index', ['product' => $product]);
     }
 
@@ -37,7 +37,17 @@ class PagesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request,[
+            'name' => 'required',
+            'category' => 'required',
+        ]);
+ 
+        Product::create([
+            'name' => $request->name,
+            'category' => $request->category,
+        ]);
+ 
+        return redirect('/');
     }
 
     /**
@@ -59,7 +69,8 @@ class PagesController extends Controller
      */
     public function edit($id)
     {
-        //
+       $product = Product::find($id);
+       return view('edit', ['product' => $product]);
     }
 
     /**
@@ -69,9 +80,18 @@ class PagesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update($id, Request $request)
     {
-        //
+        $this->validate($request,[
+           'name' => 'required',
+            'category' => 'required'
+        ]);
+
+        $product = Product::find($id);
+        $product->name = $request->name;
+        $product->category = $request->category;
+        $product->save();
+        return redirect('/');
     }
 
     /**
@@ -80,8 +100,10 @@ class PagesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function delete($id)
     {
-        //
+        $product = Product::find($id);
+        $product->delete();
+        return redirect('/');
     }
 }

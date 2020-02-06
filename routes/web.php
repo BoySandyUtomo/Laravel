@@ -16,3 +16,11 @@
 // });
 
 Route::get('/', 'PagesController@index');
+
+Route::post('/product/store', 'PagesController@store');
+
+Route::get('/product/delete/{id}', 'PagesController@delete'); 
+
+Route::get('/product/edit/{id}', 'PagesController@edit');
+
+Route::post('/product/update/{id}', 'PagesController@update');
