@@ -11,7 +11,7 @@
   <title>@yield('judul')</title>
 
   <!-- Bootstrap core CSS -->
-  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="{{ asset('vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
 
   <!-- Custom fonts for this template -->
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -21,7 +21,7 @@
   <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
 
   <!-- Custom styles for this template -->
-  <link href="css/agency.min.css" rel="stylesheet">
+  <link href="{{ asset('css/agency.min.css') }}" rel="stylesheet">
 
 </head>
 
@@ -66,5 +66,21 @@
   <script src="js/agency.min.js"></script>
 
 </body>
+<script>
+   function readURL(input, id) {
+     id = id || '#file-image';
+     if (input.files &amp;&amp; input.files[0]) {
+         var reader = new FileReader();
+ 
+         reader.onload = function (e) {
+             $(id).attr('src', e.target.result);
+         };
+ 
+         reader.readAsDataURL(input.files[0]);
+         $('#file-image').removeClass('hidden');
+         $('#start').hide();
+     }
+  }
+ </script> 
 
 </html>
