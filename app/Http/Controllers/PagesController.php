@@ -17,7 +17,8 @@ class PagesController extends Controller
      */
     public function index()
     {
-        $product = Product::all();
+        // $product = Product::all();
+        $product=Product::all();
         return view('index', ['product' => $product]);
     }
 
@@ -42,7 +43,7 @@ class PagesController extends Controller
         $this->validate($request,[
             'name' => 'required',
             'category' => 'required',
-            'fileUpload' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+            'fileUpload' => 'required|image|mimes:jpeg,png,jpg|max:2048'
         ]);
  
         // Product::create([
@@ -101,7 +102,7 @@ class PagesController extends Controller
         $this->validate($request,[
            'name' => 'required',
             'category' => 'required',          
-            'fileUpload' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+            'fileUpload' => 'required|image|mimes:jpeg,png,jpg|max:2048'
         ]);
 
         $product = Product::find($id);
