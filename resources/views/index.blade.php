@@ -3,6 +3,18 @@
   <!-- Portfolio Grid -->
 
   @section('isi')
+
+
+  <br>
+  <form action="/product/cari" method="GET">
+    <div class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" name="cari" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      </div>
+    </form>
+
+    <br>
+
   <table class="table">
   <thead class="thead-dark">
     <tr>
@@ -18,7 +30,14 @@
     <tr>
       <th scope="row">{{ $loop->iteration }}</th>
       <td>{{$prd->name}}</td>
-      <td>{{$prd->category}}</td>
+      <td>@if($prd->category == '1')
+              Mountain
+          @elseif($prd->category == '2')
+              Sea
+          @elseif($prd->category == '3')
+              Savana
+          @endif
+      </td>
       <td> <img src="{{ url('image/'.$prd->image) }}" width="150px"> </td>
       <td><a href="/product/edit/{{ $prd->id }}" class="badge badge-success">Edit</a>
         <a href="/product/delete/{{ $prd->id }}" class="badge badge-danger">Delete</a></td>
@@ -27,14 +46,16 @@
   </tbody>
 </table>
 
+{{ $product->links() }}
+
 <div class="card-body">
     <br/>
     <br/>
-    
+
+
     <form id="file-upload-form" accept-charset="utf-8" enctype="multipart/form-data" method="post" action="/product/store">
 
         {{ csrf_field() }}
-
         <div class="form-group">
             <label>Name</label>
             <input type="text" name="name" class="form-control" placeholder="Name">
@@ -49,13 +70,12 @@
 
         <div class="form-group">
             <label>Category</label>
-            <textarea name="category" class="form-control" placeholder="Category"></textarea>
-
-             @if($errors->has('category'))
-                <div class="text-danger">
-                    {{ $errors->first('category')}}
-                </div>
-            @endif
+            <select class="form-control" id="category" name="category">
+                <option value="" hidden>Select</option>
+                <option value="1">Mountain</option>
+                <option value="2">See</option>
+                <option value="3">Savana</option>
+            </select>
 
         </div>
 

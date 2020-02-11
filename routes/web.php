@@ -24,3 +24,5 @@ Route::get('/product/delete/{id}', 'PagesController@delete');
 Route::get('/product/edit/{id}', 'PagesController@edit');
 
 Route::post('/product/update/{id}', 'PagesController@update');
+
+Route::get('/product/cari/', 'PagesController@cari');

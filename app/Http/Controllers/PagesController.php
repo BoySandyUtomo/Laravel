@@ -17,8 +17,9 @@ class PagesController extends Controller
      */
     public function index()
     {
-        // $product = Product::all();
+
         $product=Product::all();
+        $product=Product::paginate(2);
         return view('index', ['product' => $product]);
     }
 
@@ -143,5 +144,21 @@ class PagesController extends Controller
 
 
         return redirect('/');
+    }
+
+    public function cari(Request $request)
+    {
+        // menangkap data pencarian
+        $cari = $request->cari;
+ 
+            // mengambil data dari table pegawai sesuai pencarian data
+        $product = DB::table('views')
+        ->where('category','like',"%".$cari."%")
+        ->orWhere('name', 'like', "%".$cari."%")
+        ->paginate();
+ 
+            // mengirim data pegawai ke view index
+        return view('index',['product' => $product]);
+ 
     }
 }

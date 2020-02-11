@@ -24,14 +24,27 @@
         </div>
 
         <div class="form-group">
-            <label>Category</label>
-            <textarea name="category" class="form-control" placeholder="{{ $product->category }}"></textarea>
-
-             @if($errors->has('category'))
-                <div class="text-danger">
-                    {{ $errors->first('category')}}
-                </div>
-            @endif
+            <label>Divisi</label>
+            <select class="form-control" id="category" name="category">
+                <option value="" hidden>Select Role</option>
+                @if( $product->category == '1')
+                    <option value="1" selected>Mountain</option>
+                    <option value="2">See</option>
+                    <option value="3">Savana</option>
+                @elseif( $product->category == '2')
+                    <option value="1">Mountain</option>
+                    <option value="2" selected>See</option>
+                    <option value="3">Savana</option>
+                @elseif( $product->category == '3')
+                    <option value="1">Mountain</option>
+                    <option value="2">See</option>
+                    <option value="3" selected>Savana</option>
+                @else
+                    <option value="1">Mountain</option>
+                    <option value="2">See</option>
+                    <option value="3">Savana</option>
+                @endif
+            </select>
 
         </div>
 
