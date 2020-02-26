@@ -11,11 +11,9 @@
 |
 */
 
-
-Auth::routes();
-
+Route::group(['middleware' => 'auth'], function(){
 // Admin Des
-Route::get('/', 'AdminController@index');
+Route::get('/admin', 'AdminController@index');
 Route::get('/create', 'AdminController@create');
 Route::post('/store', 'Admincontroller@store');
 Route::get('/edit', 'AdminController@edit');
@@ -30,9 +28,10 @@ Route::post('/storeCat', 'Admincontroller@storeCat');
 Route::get('/updateCat/{id_cat}', 'AdminController@updateCat');
 Route::post('/updateCatStore/{id_cat}', 'AdminController@updateCatStore');
 Route::get('/deleteCat/{id_cat}', 'AdminController@destroyCat');
-
+});
 // User
-// Route::get('/', 'UserController@index');
 
+Auth::routes();
+
+Route::get('/', 'UserController@index');
 Route::get('/home', 'HomeController@index')->name('home');
-Route::resource('admin', 'AdminController');

@@ -13,12 +13,15 @@ class AdminController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $destination=Destination::all();
-        $destination=Destination::paginate(2);
+        $destination=Destination::when($request->search, function($query) use($request){
+            $query->where('name', 'LIKE', '%'.$request->search.'%');
+        })->paginate(10);
         $category=Category::all();
         return view('admin/index_admin', ['destination' => $destination], compact('destination', 'category'));
+
     }
 
     /**
@@ -68,7 +71,7 @@ class AdminController extends Controller
 			'description' => $request->description,
 			'image' => $insert['image'] = "$profileImage"
         ]);
-        return redirect('/');
+        return redirect('/admin');
     }
 
     public function storeCat(Request $request)
@@ -81,7 +84,7 @@ class AdminController extends Controller
 			'nama_cat' => $request->nama_cat
 		]);
 
-    	return redirect('/');
+    	return redirect('/admin');
     }
 
     /**
@@ -193,7 +196,7 @@ class AdminController extends Controller
 	    $update->nama_cat = $request['nama_cat'];
 	    $update->update();
 		
-    	return redirect('/');
+    	return redirect('/admin');
 	}
 
     /**

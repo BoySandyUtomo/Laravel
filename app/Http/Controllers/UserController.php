@@ -1,5 +1,6 @@
 <?php
 
+namespace App\Http\Controllers;
 use Illuminate\Support\Facades\File;
 use Illuminate\Http\Request;
 use App\Destination;
@@ -14,10 +15,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $destination=Destination::all();
-        $destination=Destination::paginate(2);
-        $category=Category::all();
-        return view('user/index_user', ['destination' => $destination], compact('destination', 'category'));
+        return view('user/index_user');
     }
 
     /**
