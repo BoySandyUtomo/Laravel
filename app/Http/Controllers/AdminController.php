@@ -130,6 +130,7 @@ class AdminController extends Controller
     public function edit()
     {
         $destination=Destination::all();
+        $category = Category::all();
         $destination=Destination::paginate(10);
         return view('admin/utilities', ['destination' => $destination], compact('destination', 'category'));
     }
@@ -137,6 +138,7 @@ class AdminController extends Controller
 
     public function editCat(Request $request)
     {
+        $destination=Destination::all();
         $category = Category::all();
         $category=Category::when($request->search, function($query) use($request){
             $query->where('nama_cat', 'LIKE', '%'.$request->search.'%');
