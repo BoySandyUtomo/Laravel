@@ -15,11 +15,11 @@ class CreateDestinationTable extends Migration
     {
         Schema::create('destination', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name', 20);
+            $table->string('name', 255);
             $table->integer('category')->unsigned();
-            $table->string('location', 25);
-            $table->string('descripton', 50);
-            $table->string('image', 50);
+            $table->string('location', 255);
+            $table->string('description', 255);
+            $table->string('image', 255);
             $table->timestamps();
 
             $table->foreign('category')->references('id_cat')->on('category')

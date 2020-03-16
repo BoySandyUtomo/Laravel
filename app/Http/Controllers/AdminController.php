@@ -1,10 +1,14 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Exports\DestinationExport;
+use App\Exports\CategoryExport;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\File;
 use Illuminate\Http\Request;
 use App\Destination;
 use App\Category;
+use PDF;
 
 class AdminController extends Controller
 {
@@ -22,6 +26,25 @@ class AdminController extends Controller
         $category=Category::all();
         return view('admin/index_admin', ['destination' => $destination], compact('destination', 'category'));
 
+
+    }
+
+    public function exportExcel()
+	{
+		return Excel::download(new DestinationExport, 'Destination.xlsx');
+    }
+    
+    public function exportExcelCat()
+	{
+		return Excel::download(new CategoryExport, 'Category.xlsx');
+    }
+    
+    public function exportPdf()
+    {
+        $destination=Destination::all();
+ 
+    	$pdf = PDF::loadview('admin/exportpdf',['destination'=>$destination]);
+    	return $pdf->stream();
     }
 
     /**
@@ -71,7 +94,7 @@ class AdminController extends Controller
 			'description' => $request->description,
 			'image' => $insert['image'] = "$profileImage"
         ]);
-        return redirect('/admin');
+        return redirect('/edit');
     }
 
     public function storeCat(Request $request)
@@ -84,7 +107,7 @@ class AdminController extends Controller
 			'nama_cat' => $request->nama_cat
 		]);
 
-    	return redirect('/admin');
+    	return redirect('/editCat');
     }
 
     /**
@@ -112,9 +135,12 @@ class AdminController extends Controller
     }
 
 
-    public function editCat()
+    public function editCat(Request $request)
     {
         $category = Category::all();
+        $category=Category::when($request->search, function($query) use($request){
+            $query->where('nama_cat', 'LIKE', '%'.$request->search.'%');
+        })->paginate(10);
         return view('admin/utilities_cat', ['category' => $category], compact('destination', 'category'));
     }
 
@@ -128,7 +154,9 @@ class AdminController extends Controller
 
     public function update($id)
     {
-        $destination = Destination::find($id);
+        $destination = Destination::select('id', 'name', 'category', 'location', 'description', 'image')
+                    ->where('id', '=', $id)
+    				->first();
         $category = Category::all();
         return view('admin/update', ['destination' => $destination], compact('destination', 'category'));
 
@@ -196,7 +224,7 @@ class AdminController extends Controller
 	    $update->nama_cat = $request['nama_cat'];
 	    $update->update();
 		
-    	return redirect('/admin');
+    	return redirect('/editCat');
 	}
 
     /**

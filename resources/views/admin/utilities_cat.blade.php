@@ -11,6 +11,11 @@
             <h1 class="h3 mb-0 text-gray-800">Categories</h1>
           </div>
 
+          <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <a type="submit" class="btn btn-success" href="/exportExcelCat">Export</a>
+          </div>
+          
+
           <!-- Content Row -->
           <div class="row">
 
@@ -36,7 +41,7 @@
             @endforeach
             </tbody>
           </table>
-
+          {{ $category->links() }}
         </div>
 
         </div>

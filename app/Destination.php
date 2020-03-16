@@ -10,7 +10,7 @@ class Destination extends Model
     protected $primaryKey = 'id';
     protected $fillable = ['name', 'category', 'location', 'description', 'image'];
 
-    public function divisi(){
-    	return $this->belongsTo('App\Divisi', 'divisi','id_div');
+    public function Category(){
+    	return $this->belongsTo('App\Category', 'category','id_cat');
     }
 }

@@ -28,10 +28,16 @@ Route::post('/storeCat', 'Admincontroller@storeCat');
 Route::get('/updateCat/{id_cat}', 'AdminController@updateCat');
 Route::post('/updateCatStore/{id_cat}', 'AdminController@updateCatStore');
 Route::get('/deleteCat/{id_cat}', 'AdminController@destroyCat');
+Route::get('/exportExcelCat', 'AdminController@exportExcelCat');
+Route::get('/exportExcel', 'AdminController@exportExcel');
+Route::get('/exportPdf', 'AdminController@exportPDF');
 });
 // User
 
 Auth::routes();
 
 Route::get('/', 'UserController@index');
+Route::get('/detail/{id}', 'UserController@detail');
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('auth/google', 'Auth\GoogleController@redirectToGoogle');
+Route::get('auth/google/callback', 'Auth\GoogleController@handleGoogleCallback');

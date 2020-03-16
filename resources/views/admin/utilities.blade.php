@@ -11,6 +11,9 @@
             <h1 class="h3 mb-0 text-gray-800">Destination</h1>
           </div>
 
+          <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <a type="submit" class="btn btn-success" href="/exportExcel">Export</a>
+          </div>
           <!-- Content Row -->
           <div class="row">
 
@@ -32,7 +35,7 @@
             <tr>
               <th scope="row">{{ $loop->iteration }}</th>
               <td>{{$dst->name}}</td>
-              <td>{{$dst->category}}</td>
+              <td>{{$dst->Category->nama_cat}}</td>
               <td>{{$dst->location}}</td>
               <td>{{$dst->description}}</td>
               <td><img src="{{ url('image/'.$dst->image) }}" width="150px"> </td>

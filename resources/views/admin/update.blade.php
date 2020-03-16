@@ -33,12 +33,12 @@
 
                 <div class="form-group">
                     <label for="location">Location</label>
-                    <input type="text" class="form-control" id="location" name="location">
+                    <input type="text" class="form-control" id="location" name="location" placeholder="{{ $destination->location }}>
                 </div>
 
                 <div class="form-group">
                     <label for="description">Description</label>
-                    <input type="text" class="form-control" id="description" name="description">
+                    <textarea type="text" class="form-control" id="description" name="description">{{ $destination->description}}</textarea>
                 </div>
 
                 <div class="form-group">

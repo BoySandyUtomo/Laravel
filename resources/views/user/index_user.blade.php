@@ -1,129 +1,116 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layouts/userlayout')
+@section('title', 'Detail')
 
-<head>
-
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
-
-  <title>Daftar Mahasiswa</title>
-
-  <!-- Bootstrap core CSS -->
-  <link href="{{asset('vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
-
-  <!-- Custom styles for this template -->
-  <link href="{{asset('css/scrolling-nav.css')}}" rel="stylesheet">
-
-</head>
-
-<body id="page-top">
-
-  <!-- Navigation -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
-    <div class="container">
-      <a class="navbar-brand js-scroll-trigger" href="#page-top">Data Mahasiswa</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarResponsive">
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#about">About</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#services">Tabel Mahasiswa</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="/login">Login Admin</a>
-          </li>
-        </ul>
+@section('content')
+  <!-- preloader -->
+  <div class="preloader">
+    <div class="loader">
+      <span class="dot"></span>
+      <div class="dots">
+        <span></span>
+        <span></span>
+        <span></span>
       </div>
+    </div>
+  </div>
+  <!-- /preloader -->
+
+<header class="navigation">
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <a class="navbar-brand"><img class="img-fluid" src="{{ asset('UserAssets/images/logo.png') }}" alt="parsa"></a>
+    <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#navogation"
+      aria-controls="navogation" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse text-center" id="navogation">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="/login">Login</a>
+        </li>
+      </ul>
+      <form class="form-inline position-relative ml-lg-4" method="GET">
+        <input class="form-control px-0 w-100" name="search" type="search" placeholder="Search" value="{{ request()->get('search') }}">
+        <!-- <button class="search-icon" type="submit"><i class="ti-search text-dark"></i></button> -->
+        <button class="search-icon"><i class="ti-search text-dark"></i></button>
+      </form>
     </div>
   </nav>
+</header>
 
-  <header class="bg-primary text-white">
-    <div class="container text-center">
-      <h1>LIST MAHASISWA</h1>
-      <p class="lead">A landing page template freshly redesigned for Bootstrap 4</p>
-    </div>
-  </header>
-
-  <section id="about">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-8 mx-auto">
-          <h2>About this page</h2>
-          <p class="lead">This is a great place to talk about your webpage. This template is purposefully unstyled so you can use it as a boilerplate or starting point for you own landing page designs! This template features:</p>
-          <ul>
-            <li>Clickable nav links that smooth scroll to page sections</li>
-            <li>Responsive behavior when clicking nav links perfect for a one page website</li>
-            <li>Bootstrap's scrollspy feature which highlights which section of the page you're on in the navbar</li>
-            <li>Minimal custom CSS so you are free to explore your own unique design options</li>
-          </ul>
-        </div>
+<!-- featured post -->
+<section>
+  <div class="container-fluid p-sm-0">
+    <div class="row featured-post-slider">
+      <div class="col-lg-3 col-sm-6 mb-2 mb-lg-0 px-1">
+        <article class="card bg-dark text-center text-white border-0 rounded-0">
+          <img class="card-img rounded-0 img-fluid w-100" src="{{ asset('UserAssets/images/featured-post/1.jpg') }}" alt="post-thumb">
+          <div class="card-img-overlay">
+            <div class="card-content">
+              <p class="text-uppercase">LifeStyle</p>
+            </div>
+          </div>
+        </article>
+      </div>
+      <div class="col-lg-3 col-sm-6 mb-2 mb-lg-0 px-1">
+        <article class="card bg-dark text-center text-white border-0 rounded-0">
+          <img class="card-img rounded-0 img-fluid w-100" src="{{ asset('UserAssets/images/featured-post/2.jpg') }}" alt="post-thumb">
+          <div class="card-img-overlay">
+            <div class="card-content">
+              <p class="text-uppercase">Philosophy</p>
+            </div>
+          </div>
+        </article>
+      </div>
+      <div class="col-lg-3 col-sm-6 mb-2 mb-lg-0 px-1">
+        <article class="card bg-dark text-center text-white border-0 rounded-0">
+          <img class="card-img rounded-0 img-fluid w-100" src="{{ asset('UserAssets/images/featured-post/3.jpg') }}" alt="post-thumb">
+          <div class="card-img-overlay">
+            <div class="card-content">
+              <p class="text-uppercase">Fashion</p>
+            </div>
+          </div>
+        </article>
+      </div>
+      <div class="col-lg-3 col-sm-6 mb-2 mb-lg-0 px-1">
+        <article class="card bg-dark text-center text-white border-0 rounded-0">
+          <img class="card-img rounded-0 img-fluid w-100" src="{{ asset('UserAssets/images/featured-post/4.jpg') }}" alt="post-thumb">
+          <div class="card-img-overlay">
+            <div class="card-content">
+              <p class="text-uppercase">Article</p>
+            </div>
+          </div>
+        </article>
+      </div>
+      <div class="col-lg-3 col-sm-6 mb-2 mb-lg-0 px-1">
+        <article class="card bg-dark text-center text-white border-0 rounded-0">
+          <img class="card-img rounded-0 img-fluid w-100" src="{{ asset('UserAssets/images/featured-post/5.jpg') }}" alt="post-thumb">
+          <div class="card-img-overlay">
+            <div class="card-content">
+              <p class="text-uppercase">Nature</p>
+            </div>
+          </div>
+        </article>
       </div>
     </div>
-  </section>
+  </div>
+</section>
+<!-- /featured post -->
 
-  <section id="services" class="bg-light">
-    <div class="container">
-                    <form method="GET" class="form-inline">
-                                         <!-- Search form -->
-                    <div class="active-cyan-3 active-cyan-4 mb-4">
-                      <input class="form-control" type="text" aria-label="Search" placeholder="Cari Mahasiswa .." value="{{ request()->get('search') }}" name="search">
-                    </div>
-
-                    </form> 
-                    <table class="table">
-                        <thead class="thead-dark">
-                            <tr>
-                                <th>Nama</th>
-                                <th>NIM</th>
-                                <th>FOTO</th>
-                                <th>Jurusan</th>
-
-                            </tr>
-                        </thead>
-                        <tbody>
-              
-                        </tbody>
-                    </table>
-
-                        <br/>
-    </div>
-  </section>
-
-  <section id="contact">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-8 mx-auto">
-          <h2>Contact us</h2>
-          <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vero odio fugiat voluptatem dolor, provident officiis, id iusto! Obcaecati incidunt, qui nihil beatae magnam et repudiandae ipsa exercitationem, in, quo totam.</p>
-        </div>
+<!-- blog post -->
+<section class="section">
+  <div class="container">
+    <div class="row masonry-container">
+    @foreach( $destination as $dst)
+      <div class="col-lg-4 col-sm-6 mb-5">
+        <article class="text-center">
+          <img class="img-fluid mb-4" src="{{ url('image/'.$dst->image) }}" alt="post-thumb">
+          <p class="text-uppercase mb-2" >{{$dst->Category->nama_cat}}</p>
+          <h4 class="title-border"><a class="text-dark">{{$dst->name}}</a></h4>
+          <p>{{ $dst->description}}</p>
+            <a href="{{ url('/detail', $dst->id) }}" class="btn btn-transparent">read more</a>
+        </article>
       </div>
-    </div>
-  </section>
+      @endforeach
 
-  <!-- Footer -->
-  <footer class="py-5 bg-dark">
-    <div class="container">
-      <p class="m-0 text-center text-white">Copyright &copy; Your Website 2019</p>
-    </div>
-    <!-- /.container -->
-  </footer>
-
-  <!-- Bootstrap core JavaScript -->
-  <script src="{{asset('vendor/jquery/jquery.min.js')}}"></script>
-  <script src="{{asset('vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
-
-  <!-- Plugin JavaScript -->
-  <script src="{{asset('vendor/jquery-easing/jquery.easing.min.js')}}"></script>
-
-  <!-- Custom JavaScript for this theme -->
-  <script src="{{asset('js/scrolling-nav.js')}}"></script>
-
-</body>
-
-</html>
+@endsection

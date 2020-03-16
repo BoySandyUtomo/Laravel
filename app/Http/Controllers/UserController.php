@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Destination;
 use App\Category;
@@ -13,11 +14,26 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('user/index_user');
+        $destination=Destination::all();
+        $destination=Destination::when($request->search, function($query) use($request){
+            $query->where('name', 'LIKE', '%'.$request->search.'%');
+        })->paginate(10);
+        $category=Category::all();
+        return view('user/index_user', ['destination' => $destination], compact('destination', 'category'));
     }
 
+
+    public function detail($id)
+    {
+        $destination=Destination::all()
+                    ->where('id', '=', $id)
+                    ->first();
+        $category = Category::all();
+        return view('user/detail', ['destination' => $destination], compact('destination', 'category'));
+
+    }
     /**
      * Show the form for creating a new resource.
      *
